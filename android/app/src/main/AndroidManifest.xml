@@ -2,7 +2,7 @@
     <application
         android:label="europa_universalis"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ikona_serce">
         <activity
             android:name=".MainActivity"
             android:exported="true"
