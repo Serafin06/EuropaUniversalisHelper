@@ -61,6 +61,13 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/events/Era1Half1/
+    - assets/events/Era1Half2/
+    - assets/events/Era2Half1/
+    - assets/events/Era2Half2/
+    - assets/events/Era3Half1/
+    - assets/events/Era3Half2/
+    - assets/event_cards_mapping.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

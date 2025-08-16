@@ -5,7 +5,9 @@ import '../widgets/era_selection_card.dart';
 import '../widgets/half_selection_card.dart';
 import '../widgets/checkbox_section.dart';
 import '../widgets/reset_button_card.dart';
-import '../widgets/summary_card.dart';
+
+import 'event_card_screen.dart';
+
 
 class CheckboxErasScreen extends StatefulWidget {
   @override
@@ -51,6 +53,17 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
       currentHalf = 1;
     });
     _saveData();
+  }
+  void _navigateToEventCards() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EventCardsScreen(
+          era: currentEra,
+          half: currentHalf,
+          eraNames: eraNames,
+        ),
+      ),
+    );
   }
 
   void _changeHalf(int newHalf) {
@@ -136,13 +149,47 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
               checkboxState: checkboxState,
               onReset: _resetAllCheckboxes,
             ),
-            const SizedBox(height: 8),
-            SummaryCard(
-              currentEra: currentEra,
-              currentHalf: currentHalf,
-              checkboxState: checkboxState,
-              totalOptions: checkboxOptions.length,
+            Card(
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Karty wydarzeń',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Zobacz karty dla ${eraNames[currentEra - 1]} - ${currentHalf == 1 ? "I" : "II"} Połówka',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: _navigateToEventCards,
+                      icon: const Icon(Icons.event_note),
+                      label: const Text('Zobacz karty'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
+
           ],
         ),
       ),
