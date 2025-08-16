@@ -8,7 +8,6 @@ import '../widgets/reset_button_card.dart';
 
 import 'event_card_screen.dart';
 
-
 class CheckboxErasScreen extends StatefulWidget {
   @override
   _CheckboxErasScreenState createState() => _CheckboxErasScreenState();
@@ -54,6 +53,7 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
     });
     _saveData();
   }
+
   void _navigateToEventCards() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -61,6 +61,7 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
           era: currentEra,
           half: currentHalf,
           eraNames: eraNames,
+          checkboxState: checkboxState,
         ),
       ),
     );
@@ -76,15 +77,15 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
   void _toggleCheckbox(String option) {
     setState(() {
       bool currentValue = checkboxState.getCheckboxValue(
-          currentEra,
-          currentHalf,
-          option
+        currentEra,
+        currentHalf,
+        option,
       );
       checkboxState.setCheckboxValue(
-          currentEra,
-          currentHalf,
-          option,
-          !currentValue
+        currentEra,
+        currentHalf,
+        option,
+        !currentValue,
       );
     });
     _saveData();
@@ -108,8 +109,10 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
         ),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
+
       ),
     );
+    _saveData();
   }
 
   @override
@@ -124,10 +127,7 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            EraSelectionCard(
-              currentEra: currentEra,
-              onEraChanged: _changeEra,
-            ),
+            EraSelectionCard(currentEra: currentEra, onEraChanged: _changeEra),
             const SizedBox(height: 8),
             HalfSelectionCard(
               currentEra: currentEra,
@@ -161,16 +161,14 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
                         children: [
                           Text(
                             'Karty wydarzeń',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Zobacz karty dla ${eraNames[currentEra - 1]} - ${currentHalf == 1 ? "I" : "II"} Połówka',
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey[600],
-                            ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: Colors.grey[600]),
                           ),
                         ],
                       ),
@@ -182,14 +180,16 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-
           ],
         ),
       ),

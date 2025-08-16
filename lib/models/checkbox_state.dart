@@ -1,5 +1,6 @@
 class CheckboxState {
   final Map<int, Map<int, Map<String, bool>>> _eraStates = {};
+  final Map<int, Map<int, Set<String>>> _markedCards = {};
 
   CheckboxState() {
     _initializeStates();
@@ -8,8 +9,10 @@ class CheckboxState {
   void _initializeStates() {
     for (int era = 1; era <= 3; era++) {
       _eraStates[era] = {};
+      _markedCards[era] = {};
       for (int half = 1; half <= 2; half++) {
         _eraStates[era]![half] = {};
+        _markedCards[era]![half] = <String>{};
       }
     }
   }
@@ -28,6 +31,8 @@ class CheckboxState {
         for (String option in options) {
           _eraStates[era]![half]![option] = false;
         }
+        // Reset zaznaczonych kart
+        _markedCards[era]![half]!.clear();
       }
     }
   }
@@ -47,6 +52,31 @@ class CheckboxState {
         total += _eraStates[era]![half]!.values
             .where((isChecked) => isChecked)
             .length;
+      }
+    }
+    return total;
+  }
+  bool isCardMarked(int era, int half, String cardId) {
+    return _markedCards[era]?[half]?.contains(cardId) ?? false;
+  }
+
+  void toggleCardMark(int era, int half, String cardId) {
+    if (isCardMarked(era, half, cardId)) {
+      _markedCards[era]![half]!.remove(cardId);
+    } else {
+      _markedCards[era]![half]!.add(cardId);
+    }
+  }
+
+  int getMarkedCardsCount(int era, int half) {
+    return _markedCards[era]?[half]?.length ?? 0;
+  }
+
+  int getTotalMarkedCardsCount() {
+    int total = 0;
+    for (int era = 1; era <= 3; era++) {
+      for (int half = 1; half <= 2; half++) {
+        total += _markedCards[era]![half]!.length;
       }
     }
     return total;

@@ -11,7 +11,7 @@ class CardsMappingService {
     if (_cardsData != null) return;
 
     try {
-      final String jsonString = await rootBundle.loadString('assets/eventCards_mapping.json');
+      final String jsonString = await rootBundle.loadString('assets/event_cards_mapping.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       _cardsData = {};

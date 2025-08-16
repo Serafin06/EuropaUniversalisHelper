@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/checkbox_state.dart';
 import '../models/event_card.dart';
 import '../services/event_cards_service.dart';
 import '../widgets/event_card_widget.dart';
@@ -9,12 +10,14 @@ class EventCardsScreen extends StatefulWidget {
   final int era;
   final int half;
   final List<String> eraNames;
+  final CheckboxState checkboxState;
 
   const EventCardsScreen({
     Key? key,
     required this.era,
     required this.half,
     required this.eraNames,
+    required this.checkboxState,
   }) : super(key: key);
 
   @override
@@ -24,6 +27,7 @@ class EventCardsScreen extends StatefulWidget {
 class _EventCardsScreenState extends State<EventCardsScreen> {
   List<EventCard> eventCards = [];
   bool isLoading = true;
+  bool isSelection = false;
 
   @override
   void initState() {
@@ -39,6 +43,28 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
     });
   }
 
+  void _toggleSelectionMode() {
+    setState(() {
+      isSelection = !isSelection;
+    });
+  }
+
+  void _handleCardTap(EventCard card) {
+    if (isSelection) {
+      // W trybie zaznaczania - toggle zaznaczenia
+      setState(() {
+        widget.checkboxState.toggleCardMark(widget.era, widget.half, card.id);
+      });
+    } else {
+      // W normalnym trybie - pokaż pełny obraz
+      _showEventCard(card);
+    }
+  }
+
+  void _showEventCard(EventCard eventCard) {
+    EventCardDialog.show(context, eventCard);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -52,6 +78,8 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
       );
     }
 
+    int markedCount = widget.checkboxState.getMarkedCardsCount(widget.era, widget.half);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.eraNames[widget.era - 1]} - ${widget.half == 1 ? "I" : "II"} Połówka'),
@@ -62,7 +90,7 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Header z informacją
+            // Header z informacją i przyciskiem
             Card(
               elevation: 4,
               color: Colors.blue[50],
@@ -83,16 +111,28 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
                           Text(
                             'Karty wydarzeń',
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.bold, color: Colors.deepPurple,
                             ),
                           ),
                           Text(
-                            'Kliknij na kartę aby zobaczyć pełny obraz',
+                            isSelection
+                                ? 'Tryb zaznaczania: $markedCount/${eventCards.length} zaznaczonych'
+                                : 'Kliknij na kartę aby zobaczyć pełny obraz. $markedCount/${eventCards.length} zaznaczonych',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: Colors.grey[600],
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: _toggleSelectionMode,
+                      icon: Icon(isSelection ? Icons.check_circle : Icons.radio_button_unchecked),
+                      label: Text(isSelection ? 'Zakończ' : 'Zaznacz\nOdznacz'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isSelection ? Colors.lightBlueAccent : Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       ),
                     ),
                   ],
@@ -104,17 +144,21 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // 3 karty w rzędzie
+                  crossAxisCount: 3,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
-                  childAspectRatio: 0.75, // Proporcje kart
+                  childAspectRatio: 0.75,
                 ),
                 itemCount: eventCards.length,
                 itemBuilder: (context, index) {
                   EventCard card = eventCards[index];
+                  bool isMarked = widget.checkboxState.isCardMarked(widget.era, widget.half, card.id);
+
                   return EventCardWidget(
                     eventCard: card,
-                    onTap: () => _showEventCard(context, card),
+                    isMarked: isMarked,
+                    isSelection: isSelection,
+                    onTap: () => _handleCardTap(card),
                   );
                 },
               ),
@@ -123,9 +167,5 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
         ),
       ),
     );
-  }
-
-  void _showEventCard(BuildContext context, EventCard eventCard) {
-    EventCardDialog.show(context, eventCard);
   }
 }
