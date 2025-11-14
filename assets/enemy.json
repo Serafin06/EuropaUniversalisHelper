@@ -1,0 +1,98 @@
+{
+  "era1_half1": [
+    {"title": "11A-1", "filename": "11A-1.png"},
+    {"title": "12A-1", "filename": "12A-1.png"},
+    {"title": "13A-1", "filename": "13A-1.png"},
+    {"title": "14A-1", "filename": "14A-1.png"},
+    {"title": "101-1", "filename": "101-1.png"},
+    {"title": "105-1", "filename": "105-1.png"},
+    {"title": "106-1", "filename": "106-1.png"},
+    {"title": "107-1", "filename": "107-1.png"},
+    {"title": "158B", "filename": "158B.png"},
+    {"title": "161B", "filename": "161B.png"}
+  ],
+  "era1_half2": [
+    {"title": "11A-2", "filename": "11A-2.png"},
+    {"title": "12A-2", "filename": "12A-2.png"},
+    {"title": "13A-2", "filename": "13A-2.png"},
+    {"title": "14A-3", "filename": "14A-3.png"},
+    {"title": "101-2", "filename": "101-2.png"},
+    {"title": "105-2", "filename": "105-2.png"},
+    {"title": "106-2", "filename": "106-2.png"},
+    {"title": "107-2", "filename": "107-2.png"},
+    {"title": "160B", "filename": "160B.png"},
+    {"title": "162B", "filename": "162B.png"}
+  ],
+  "era2_half1": [
+    {"title": "21A-1", "filename": "21A-1.png"},
+    {"title": "22A-1", "filename": "22A-1.png"},
+    {"title": "23A-1", "filename": "23A-1.png"},
+    {"title": "24A-3", "filename": "24A-3.png"},
+    {"title": "201-1", "filename": "201-1.png"},
+    {"title": "205-1", "filename": "205-1.png"},
+    {"title": "206-1", "filename": "206-1.png"},
+    {"title": "207-1", "filename": "207-1.png"},
+    {"title": "251B", "filename": "251B.png"},
+    {"title": "264B", "filename": "264B.png"}
+  ],
+  "era2_half2": [
+    {"title": "21A-2", "filename": "21A-2.png"},
+    {"title": "22A-2", "filename": "22A-2.png"},
+    {"title": "23A-2", "filename": "23A-2.png"},
+    {"title": "24A-4", "filename": "24A-4.png"},
+    {"title": "201-2", "filename": "201-2.png"},
+    {"title": "205-2", "filename": "205-2.png"},
+    {"title": "206-2", "filename": "206-2.png"},
+    {"title": "207-2", "filename": "207-2.png"},
+    {"title": "263B", "filename": "263B.png"},
+    {"title": "262B", "filename": "262B.png"}
+  ],
+  "era3_half1": [
+    {"title": "31A-1", "filename": "31A-1.png"},
+    {"title": "32A-1", "filename": "32A-1.png"},
+    {"title": "33A-1", "filename": "33A-1.png"},
+    {"title": "34A-1", "filename": "34A-1.png"},
+    {"title": "301-1", "filename": "301-1.png"},
+    {"title": "305-1", "filename": "305-1.png"},
+    {"title": "306-1", "filename": "306-1.png"},
+    {"title": "307-1", "filename": "307-1.png"},
+    {"title": "353B", "filename": "353B.png"},
+    {"title": "360B", "filename": "360B.png"}
+  ],
+  "era3_half2": [
+    {"title": "31A-2", "filename": "31A-2.png"},
+    {"title": "32A-2", "filename": "32A-2.png"},
+    {"title": "33A-2", "filename": "33A-2.png"},
+    {"title": "34A-3", "filename": "34A-3.png"},
+    {"title": "301-2", "filename": "301-2.png"},
+    {"title": "305-2", "filename": "305-2.png"},
+    {"title": "306-2", "filename": "306-2.png"},
+    {"title": "307-2", "filename": "307-2.png"},
+    {"title": "354B", "filename": "354B.png"},
+    {"title": "363B", "filename": "363B.png"}
+  ],
+  "era4_half1": [
+    {"title": "31A-1", "filename": "31A-1.png"},
+    {"title": "32A-1", "filename": "32A-1.png"},
+    {"title": "33A-1", "filename": "33A-1.png"},
+    {"title": "34A-1", "filename": "34A-1.png"},
+    {"title": "301-1", "filename": "301-1.png"},
+    {"title": "305-1", "filename": "305-1.png"},
+    {"title": "306-1", "filename": "306-1.png"},
+    {"title": "307-1", "filename": "307-1.png"},
+    {"title": "353B", "filename": "353B.png"},
+    {"title": "360B", "filename": "360B.png"}
+  ],
+  "era4_half2": [
+    {"title": "31A-2", "filename": "31A-2.png"},
+    {"title": "32A-2", "filename": "32A-2.png"},
+    {"title": "33A-2", "filename": "33A-2.png"},
+    {"title": "34A-3", "filename": "34A-3.png"},
+    {"title": "301-2", "filename": "301-2.png"},
+    {"title": "305-2", "filename": "305-2.png"},
+    {"title": "306-2", "filename": "306-2.png"},
+    {"title": "307-2", "filename": "307-2.png"},
+    {"title": "354B", "filename": "354B.png"},
+    {"title": "363B", "filename": "363B.png"}
+  ]
+}
