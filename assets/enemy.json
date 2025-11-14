@@ -72,27 +72,27 @@
     {"title": "363B", "filename": "363B.png"}
   ],
   "era4_half1": [
-    {"title": "31A-1", "filename": "31A-1.png"},
-    {"title": "32A-1", "filename": "32A-1.png"},
-    {"title": "33A-1", "filename": "33A-1.png"},
-    {"title": "34A-1", "filename": "34A-1.png"},
-    {"title": "301-1", "filename": "301-1.png"},
-    {"title": "305-1", "filename": "305-1.png"},
-    {"title": "306-1", "filename": "306-1.png"},
-    {"title": "307-1", "filename": "307-1.png"},
-    {"title": "353B", "filename": "353B.png"},
-    {"title": "360B", "filename": "360B.png"}
+    {"title": "41A-1", "filename": "41A-1.png"},
+    {"title": "42A-1", "filename": "42A-1.png"},
+    {"title": "43A-1", "filename": "43A-1.png"},
+    {"title": "44A-1", "filename": "44A-1.png"},
+    {"title": "401-1", "filename": "401-1.png"},
+    {"title": "405-1", "filename": "405-1.png"},
+    {"title": "406-1", "filename": "406-1.png"},
+    {"title": "407-1", "filename": "407-1.png"},
+    {"title": "453B", "filename": "453B.png"},
+    {"title": "454B", "filename": "454B.png"}
   ],
   "era4_half2": [
-    {"title": "31A-2", "filename": "31A-2.png"},
-    {"title": "32A-2", "filename": "32A-2.png"},
-    {"title": "33A-2", "filename": "33A-2.png"},
-    {"title": "34A-3", "filename": "34A-3.png"},
-    {"title": "301-2", "filename": "301-2.png"},
-    {"title": "305-2", "filename": "305-2.png"},
-    {"title": "306-2", "filename": "306-2.png"},
-    {"title": "307-2", "filename": "307-2.png"},
-    {"title": "354B", "filename": "354B.png"},
-    {"title": "363B", "filename": "363B.png"}
+    {"title": "41A-2", "filename": "41A-2.png"},
+    {"title": "42A-2", "filename": "42A-2.png"},
+    {"title": "43A-2", "filename": "43A-2.png"},
+    {"title": "44A-2", "filename": "44A-2.png"},
+    {"title": "401-2", "filename": "401-2.png"},
+    {"title": "405-2", "filename": "405-2.png"},
+    {"title": "406-2", "filename": "406-2.png"},
+    {"title": "407-2", "filename": "407-2.png"},
+    {"title": "452B", "filename": "452B.png"},
+    {"title": "458B", "filename": "458B.png"}
   ]
 }

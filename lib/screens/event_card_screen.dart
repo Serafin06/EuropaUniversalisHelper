@@ -12,13 +12,17 @@ class EventCardsScreen extends StatefulWidget {
   final List<String> eraNames;
   final CheckboxState checkboxState;
 
+  final String jsonFileName;
+
   const EventCardsScreen({
     Key? key,
     required this.era,
     required this.half,
     required this.eraNames,
     required this.checkboxState,
+    required this.jsonFileName,
   }) : super(key: key);
+
 
   @override
   _EventCardsScreenState createState() => _EventCardsScreenState();
@@ -36,7 +40,11 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
   }
 
   Future<void> _loadEventCards() async {
-    final cards = await EventCardsService.getEventCards(widget.era, widget.half);
+    final cards = await EventCardsService.getEventCards(
+      widget.era,
+      widget.half,
+      widget.jsonFileName,
+    );
     setState(() {
       eventCards = cards;
       isLoading = false;

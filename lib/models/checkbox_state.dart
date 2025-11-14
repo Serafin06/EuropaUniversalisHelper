@@ -7,7 +7,7 @@ class CheckboxState {
   }
 
   void _initializeStates() {
-    for (int era = 1; era <= 3; era++) {
+    for (int era = 1; era <= 4; era++) {
       _eraStates[era] = {};
       _markedCards[era] = {};
       for (int half = 1; half <= 2; half++) {
@@ -26,7 +26,7 @@ class CheckboxState {
   }
 
   void resetAll(List<String> options) {
-    for (int era = 1; era <= 3; era++) {
+    for (int era = 1; era <= 4; era++) {
       for (int half = 1; half <= 2; half++) {
         for (String option in options) {
           _eraStates[era]![half]![option] = false;
@@ -47,7 +47,7 @@ class CheckboxState {
 
   int getTotalCheckedCount() {
     int total = 0;
-    for (int era = 1; era <= 3; era++) {
+    for (int era = 1; era <= 4; era++) {
       for (int half = 1; half <= 2; half++) {
         total += _eraStates[era]![half]!.values
             .where((isChecked) => isChecked)
@@ -74,7 +74,7 @@ class CheckboxState {
 
   int getTotalMarkedCardsCount() {
     int total = 0;
-    for (int era = 1; era <= 3; era++) {
+    for (int era = 1; era <= 4; era++) {
       for (int half = 1; half <= 2; half++) {
         total += _markedCards[era]![half]!.length;
       }

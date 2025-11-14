@@ -7,17 +7,25 @@ class CardsMappingService {
   static Map<String, List<Map<String, String>>>? _cardsData;
 
   // Ładuje mapowanie z pliku JSON
-  static Future<void> loadCardsMapping() async {
-    if (_cardsData != null) return;
+  static String? _currentJsonFile;
+
+  static Future<void> loadCardsMapping(String jsonFileName) async {
+    // Przeładuj tylko jeśli zmienił się plik
+    if (_cardsData != null && _currentJsonFile == jsonFileName) return;
 
     try {
-      final String jsonString = await rootBundle.loadString('assets/event_cards_mapping.json');
+      final String jsonString = await rootBundle.loadString(
+          'assets/$jsonFileName');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       _cardsData = {};
       jsonData.forEach((key, value) {
-        _cardsData![key] = (value as List).map((item) => Map<String, String>.from(item)).toList();
+        _cardsData![key] = (value as List)
+            .map((item) => Map<String, String>.from(item))
+            .toList();
       });
+
+      _currentJsonFile = jsonFileName;
     } catch (e) {
       print('Błąd ładowania mapowania kart: $e');
       _cardsData = {};
@@ -25,8 +33,9 @@ class CardsMappingService {
   }
 
   // Pobiera karty dla konkretnej ery i połówki
-  static Future<List<EventCard>> getEventCards(int era, int half) async {
-    await loadCardsMapping();
+  static Future<List<EventCard>> getEventCards(int era, int half,
+      String jsonFileName) async {
+    await loadCardsMapping(jsonFileName);
 
     String key = 'era${era}_half${half}';
     List<EventCard> cards = [];
@@ -41,16 +50,17 @@ class CardsMappingService {
           title: cardData['title']!,
           thumbnailPath: folderPath,
           fullImagePath: folderPath,
-                  ));
+        ));
       }
     }
 
     return cards;
   }
 
-  // Pobiera liczbę kart dla ery/połówki
-  static Future<int> getCardCount(int era, int half) async {
-    final cards = await getEventCards(era, half);
+// Pobiera liczbę kart dla ery/połówki
+  static Future<int> getCardCount(int era, int half,
+      String jsonFileName) async {
+    final cards = await getEventCards(era, half, jsonFileName);
     return cards.length;
   }
 }

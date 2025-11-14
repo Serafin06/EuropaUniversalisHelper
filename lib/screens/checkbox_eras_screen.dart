@@ -5,6 +5,8 @@ import '../widgets/era_selection_card.dart';
 import '../widgets/half_selection_card.dart';
 import '../widgets/checkbox_section.dart';
 import '../widgets/reset_button_card.dart';
+import '../models/scenarioConfig.dart';
+import '../services/scenarioRepository.dart';
 
 import 'event_card_screen.dart';
 
@@ -16,8 +18,9 @@ class CheckboxErasScreen extends StatefulWidget {
 class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
   int currentEra = 1;
   int currentHalf = 1;
+  ScenarioConfig? currentScenario;
 
-  final List<String> eraNames = ['Era 1', 'Era 2', 'Era 3'];
+  final List<String> eraNames = ['Era 1', 'Era 2', 'Era 3', 'Era 4'];
   final List<String> checkboxOptions = ['plus', 'trojkat', 'kwadrat', 'kolo'];
   final CheckboxState checkboxState = CheckboxState();
 
@@ -29,10 +32,13 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
   }
 
   Future<void> _loadData() async {
-    // Ładowanie aktualnego stanu ery i połówki
-    final currentState = await StorageService.loadCurrentState();
+    final scenarioData = await StorageService.getSelectedScenario();
 
-    // Ładowanie stanów checkboxów
+    if (scenarioData != null) {
+      currentScenario = ScenarioRepository.getScenarioById(scenarioData['scenarioId']);
+    }
+
+    final currentState = await StorageService.loadCurrentState();
     await StorageService.loadCheckboxStates(checkboxState, checkboxOptions);
 
     setState(() {
@@ -55,6 +61,8 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
   }
 
   void _navigateToEventCards() {
+    if (currentScenario == null) return;
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EventCardsScreen(
@@ -62,6 +70,7 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
           half: currentHalf,
           eraNames: eraNames,
           checkboxState: checkboxState,
+          jsonFileName: currentScenario!.jsonFileName,
         ),
       ),
     );
@@ -122,6 +131,34 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
         title: const Text('Europa Universalis Masters'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Reset Scenario'),
+                  content: const Text('This will clear all progress. Continue?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        Navigator.of(context).pop();
+                        await StorageService.clearAllData();
+                        Navigator.of(context).pushReplacementNamed('/');
+                      },
+                      child: const Text('Reset'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -1,6 +1,7 @@
+import 'package:europa_universalis/screens/appRouter.dart';
 import 'package:flutter/material.dart';
-import 'screens/checkbox_eras_screen.dart';
 import 'theme/app_theme.dart';
+
 
 
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: CheckboxErasScreen(),
+      home: const AppRouter(),
       debugShowCheckedModeBanner: false,
     );
   }
