@@ -29,7 +29,7 @@ class EraSelectionCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                for (int era = 1; era <= 3; era++)
+                for (int era = 1; era <= 4; era++)
                   _buildEraButton(context, era),
               ],
             ),
