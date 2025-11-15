@@ -67,6 +67,8 @@ flutter:
     - assets/events/Era2Half2/
     - assets/events/Era3Half1/
     - assets/events/Era3Half2/
+    - assets/events/Era4Half1/
+    - assets/events/Era4Half2/
     - assets/event_cards_mapping.json
     - assets/enemy.json
 
