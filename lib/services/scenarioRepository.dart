@@ -8,17 +8,37 @@ class ScenarioRepository {
       id: 'grand_campaign',
       displayName: 'The Grand Campaign',
       playerCount: 6,
-      jsonFileName: 'event_cards_mapping.json',
       erasCount: 4,
+      kingdomOptions: [
+        KingdomOption(
+          id: 'default',
+          displayName: 'Standard',
+          jsonFileName: 'event_cards_mapping.json',
+        ),
+      ],
     ),
     ScenarioConfig(
-      id: 'enemy_at_gates',
+      id: 'enemy_at_gates_4',
       displayName: 'The Enemy at the Gates',
       playerCount: 4,
-      jsonFileName: 'enemy.json',
       erasCount: 4,
+      kingdomOptions: [
+        KingdomOption(
+          id: 'default',
+          displayName: 'Standard',
+          jsonFileName: 'enemy.json',
+        ),
+      ],
     ),
+
+    // Tutaj dodasz nowe scenariusze
   ];
+
+  static List<ScenarioConfig> getScenariosForPlayerCount(int playerCount) {
+    return availableScenarios
+        .where((s) => s.playerCount == playerCount)
+        .toList();
+  }
 
   static ScenarioConfig? getScenarioById(String id) {
     try {
@@ -26,5 +46,13 @@ class ScenarioRepository {
     } catch (e) {
       return null;
     }
+  }
+
+  static List<int> getAvailablePlayerCounts() {
+    return availableScenarios
+        .map((s) => s.playerCount)
+        .toSet()
+        .toList()
+      ..sort();
   }
 }

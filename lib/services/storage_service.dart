@@ -64,25 +64,41 @@ class StorageService {
   static const String _scenarioIdKey = 'selected_scenario_id';
   static const String _playerCountKey = 'player_count';
 
-  static Future<void> saveSelectedScenario(String scenarioId, int playerCount) async {
+  static Future<void> clearAllData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
+  static const String _kingdomIdKey = 'selected_kingdom_id';
+
+  static Future<void> saveSelectedScenario(
+      String scenarioId,
+      int playerCount,
+      String? kingdomId,
+      ) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_scenarioIdKey, scenarioId);
     await prefs.setInt(_playerCountKey, playerCount);
+    if (kingdomId != null) {
+      await prefs.setString(_kingdomIdKey, kingdomId);
+    } else {
+      await prefs.remove(_kingdomIdKey);
+    }
   }
 
   static Future<Map<String, dynamic>?> getSelectedScenario() async {
     final prefs = await SharedPreferences.getInstance();
     final scenarioId = prefs.getString(_scenarioIdKey);
     final playerCount = prefs.getInt(_playerCountKey);
+    final kingdomId = prefs.getString(_kingdomIdKey);
 
     if (scenarioId != null && playerCount != null && playerCount > 0) {
-      return {'scenarioId': scenarioId, 'playerCount': playerCount};
+      return {
+        'scenarioId': scenarioId,
+        'playerCount': playerCount,
+        'kingdomId': kingdomId,
+      };
     }
     return null;
-  }
-
-  static Future<void> clearAllData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
   }
 }

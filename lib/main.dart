@@ -1,4 +1,4 @@
-import 'package:europa_universalis/screens/appRouter.dart';
+import 'package:europa_universalis/screens/app_router.dart';
 import 'package:flutter/material.dart';
 import 'theme/app_theme.dart';
 

@@ -23,6 +23,8 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
   final List<String> eraNames = ['Era 1', 'Era 2', 'Era 3', 'Era 4'];
   final List<String> checkboxOptions = ['plus', 'trojkat', 'kwadrat', 'kolo'];
   final CheckboxState checkboxState = CheckboxState();
+  String? currentJsonFileName;
+
 
   @override
   void initState() {
@@ -35,7 +37,18 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
     final scenarioData = await StorageService.getSelectedScenario();
 
     if (scenarioData != null) {
-      currentScenario = ScenarioRepository.getScenarioById(scenarioData['scenarioId']);
+      currentScenario = ScenarioRepository.getScenarioById(
+        scenarioData['scenarioId'],
+      );
+
+      if (currentScenario != null) {
+        final kingdomId = scenarioData['kingdomId'];
+        final kingdom = currentScenario!.kingdomOptions.firstWhere(
+              (k) => k.id == kingdomId,
+          orElse: () => currentScenario!.kingdomOptions.first,
+        );
+        currentJsonFileName = kingdom.jsonFileName;
+      }
     }
 
     final currentState = await StorageService.loadCurrentState();
@@ -61,7 +74,7 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
   }
 
   void _navigateToEventCards() {
-    if (currentScenario == null) return;
+    if (currentScenario == null || currentJsonFileName == null) return;
 
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -70,7 +83,7 @@ class _CheckboxErasScreenState extends State<CheckboxErasScreen> {
           half: currentHalf,
           eraNames: eraNames,
           checkboxState: checkboxState,
-          jsonFileName: currentScenario!.jsonFileName,
+          jsonFileName: currentJsonFileName!,
         ),
       ),
     );
