@@ -25,11 +25,17 @@ class StorageService {
 
     for (int era = 1; era <= 4; era++) {
       for (int half = 1; half <= 2; half++) {
+        // Zapisz checkboxy
         String key = 'era_${era}_half_$half';
         String encodedState = json.encode(
             checkboxState.allStates[era]![half]!
         );
         await prefs.setString(key, encodedState);
+
+        // DODAJ ZAPISYWANIE ZAZNACZONYCH KART
+        String markedKey = 'marked_era_${era}_half_$half';
+        List<String> markedCards = checkboxState.getMarkedCardsList(era, half);
+        await prefs.setStringList(markedKey, markedCards);
       }
     }
   }
@@ -57,6 +63,12 @@ class StorageService {
           for (String option in options) {
             checkboxState.setCheckboxValue(era, half, option, false);
           }
+        }
+
+        String markedKey = 'marked_era_${era}_half_$half';
+        List<String>? markedCards = prefs.getStringList(markedKey);
+        if (markedCards != null) {
+          checkboxState.setMarkedCardsList(era, half, markedCards);
         }
       }
     }

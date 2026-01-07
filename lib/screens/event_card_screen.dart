@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/checkbox_state.dart';
 import '../models/event_card.dart';
 import '../services/event_cards_service.dart';
+import '../services/storage_service.dart';
 import '../widgets/event_card_widget.dart';
 import '../widgets/event_card_dialog.dart';
 
@@ -63,6 +64,7 @@ class _EventCardsScreenState extends State<EventCardsScreen> {
       setState(() {
         widget.checkboxState.toggleCardMark(widget.era, widget.half, card.id);
       });
+      StorageService.saveCheckboxStates(widget.checkboxState);
     } else {
       // W normalnym trybie - pokaż pełny obraz
       _showEventCard(card);

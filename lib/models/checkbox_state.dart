@@ -81,4 +81,12 @@ class CheckboxState {
     }
     return total;
   }
+
+  List<String> getMarkedCardsList(int era, int half) {
+    return _markedCards[era]?[half]?.toList() ?? [];
+  }
+
+  void setMarkedCardsList(int era, int half, List<String> cards) {
+    _markedCards[era]![half] = cards.toSet();
+  }
 }
