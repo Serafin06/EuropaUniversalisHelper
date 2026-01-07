@@ -71,6 +71,9 @@ flutter:
     - assets/events/Era4Half2/
     - assets/event_cards_mapping.json
     - assets/enemy.json
+    - assets/meditarian_dominance.json
+    - assets/old_new_pretenders_5_1.json
+    - assets/old_new_pretenders_5_2.json
 
 
   # To add assets to your application, add an assets section, like this:

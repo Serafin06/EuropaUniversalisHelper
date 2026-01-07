@@ -30,7 +30,37 @@ class ScenarioRepository {
         ),
       ],
     ),
-
+    ScenarioConfig(
+      id: 'meditarrianean_dominance',
+      displayName: 'Mediterranean Dominance',
+      playerCount: 5,
+      erasCount: 3,
+      kingdomOptions: [
+        KingdomOption(
+          id: 'default',
+          displayName: 'Standard',
+          jsonFileName: 'meditarian_dominance.json',
+        ),
+      ],
+    ),
+    ScenarioConfig(
+      id: 'old_new_pretenders_5_branderburg',
+      displayName: 'Old and New Pretenders',
+      playerCount: 5,
+      erasCount: 4,
+      kingdomOptions: [
+        KingdomOption(
+          id: 'branderburg',
+          displayName: 'Branderburg',
+          jsonFileName: 'old_new_pretenders_5_1.json',
+        ),
+        KingdomOption(
+          id: 'papal_states',
+          displayName: 'Papal States',
+          jsonFileName: 'old_new_pretenders_5_2.json',
+        ),
+      ],
+    ),
     // Tutaj dodasz nowe scenariusze
   ];
 
